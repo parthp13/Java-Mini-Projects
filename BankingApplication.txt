@@ -1,0 +1,141 @@
+package bankingapplication;
+import java.util.Scanner;
+
+public class BankingApplication {
+    public static void main(String[] args) {
+      BankAccount obj = new BankAccount("Parth","Cse2-076");
+                  obj.showMenu();
+      
+    }
+    
+}
+
+class BankAccount{
+    
+    double balance;
+    double previousTransaction;
+    String customerName;
+    String customerId;
+  
+    BankAccount() {
+    /* Initializing constructor */
+    }
+     
+    BankAccount(String customerName,String customerId){
+    this.customerName = customerName;
+    this.customerId = customerId;
+    }
+
+    
+    void deposit(double amount){
+        
+    if(amount != 0.0){
+        balance = balance + amount;
+        previousTransaction = amount;
+                   }
+    }
+    
+    void withdraw(double amount){
+    
+    if(amount != 0.0){
+        balance = balance - amount;
+        previousTransaction = -amount;
+                   }
+    }
+    
+    void getPreviousTransaction(){
+    
+    if(previousTransaction > 0){
+    System.out.println("Deposited Amount :"+previousTransaction);
+    }
+    else if(previousTransaction < 0){
+    System.out.println("Withdrawed Amount :"+Math.abs(previousTransaction));
+    }
+    else{
+    System.out.println("No Transaction was carried out !!");
+    }
+    }
+    
+   
+    
+    void showMenu(){
+        
+        int option;
+        Scanner sc = new Scanner(System.in);
+        
+    System.out.println("*****************************************"); 
+    System.out.println("Welcome to NNP Banking Corporation Ltd.");
+    System.out.println("Welcome "+customerName);
+    System.out.println("Your Id :"+customerId);
+    System.out.println("*****************************************");
+    System.out.println("\n");
+    System.out.println("*****************************************");
+    System.out.println("#1 Check Balance");
+    System.out.println("#2 Deposit");
+    System.out.println("#3 Withdraw");
+    System.out.println("#4 Preview Previous Transaction");
+    System.out.println("#5 Exit");
+    
+    do{
+         System.out.println("*****************************************");
+         System.out.println("Enter a Option :");
+         option = sc.nextInt();
+         System.out.println("*****************************************");
+         System.out.println("\n");
+         
+         switch(option){
+         
+         case 1:
+         System.out.println("*****************************************");
+         System.out.println("Your Balance :"+balance);    
+         System.out.println("*****************************************");     
+         System.out.println("\n"); 
+         break;
+         
+         case 2:
+         System.out.println("*****************************************"); 
+         System.out.println("Enter the Amount to be Deposited :"); 
+         double amount = sc.nextDouble();
+         deposit(amount);
+         System.out.println("*****************************************");
+         System.out.println("Current Balance after Depositing:"+amount+" is "+balance); 
+         System.out.println("*****************************************");
+         System.out.println("\n");
+         break;
+         
+         case 3:
+         System.out.println("*****************************************"); 
+         
+         if(balance == 0.0){
+         System.out.println("Balance = 0.0 : Money cannot be withdrawed."); 
+         break;
+         }
+         System.out.println("Enter the Amount to be Withdrawed :"); 
+         amount = sc.nextDouble();
+         System.out.println("*****************************************");
+         withdraw(amount);
+         System.out.println("Current Balance after withdrawing:"+amount+" is "+balance); 
+         System.out.println("*****************************************");
+         System.out.println("\n");
+         break;
+         
+         case 4:
+         System.out.println("*****************************************");
+         System.out.println("Last Transaction:");
+         getPreviousTransaction();
+         System.out.println("*****************************************"); 
+         System.out.println("\n");
+         break;
+         
+         default:
+         System.out.println("Invalid Option : Please Enter Again");
+         
+         }
+         
+    }while(option != 5);
+    
+    System.out.println("Thanking for using our Services !!");
+    
+    }
+   
+} 
